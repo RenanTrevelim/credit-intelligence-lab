@@ -1,0 +1,156 @@
+BANCO AURORA
+CATÁLOGO DE PRODUTOS E SERVIÇOS DE CRÉDITO
+
+Código: CAT-001
+Versão: 1.0
+Início de vigência: 01/10/2026
+Área responsável: Produtos de Crédito
+Classificação: Uso interno
+
+1. FINALIDADE
+
+[CAT01] Uso do catálogo
+Identificar as modalidades documentadas, suas características
+e as políticas que devem orientar o atendimento.
+
+A identificação de um produto não representa oferta
+individual, aprovação ou garantia de contratação.
+
+2. CRÉDITO PESSOAL SEM GARANTIA
+
+[CAT02] Identificação e estrutura
+Código: CP-SG.
+Público: Pessoa física.
+Finalidade: Disponibilização de recursos para necessidades pessoais.
+Garantia vinculada: Não prevista.
+Entrada: Não prevista.
+Pagamento: Parcelas mensais fixas.
+
+O produto não deve ser confundido com crédito consignado
+ou financiamento de um bem específico.
+
+[CAT03] Parâmetros comerciais
+Valor solicitado:
+mínimo de R$ 1.000,00 e máximo de R$ 30.000,00.
+
+Prazo:
+mínimo de 6 e máximo de 36 parcelas mensais.
+
+Os limites são inclusivos.
+O enquadramento detalhado está definido em POL-CP-001.
+
+[CAT04] Capacidade de pagamento e documentação
+O limite de comprometimento proposto para o fluxo regular
+é de 35%, conforme CP09 da política POL-CP-001.
+
+A documentação depende do perfil do proponente
+e deve observar o manual DOC-001.
+
+A condição de autônomo, assalariado, aposentado ou pensionista
+orienta a documentação de renda; não constitui,
+isoladamente, decisão de crédito.
+
+[CAT05] Formação da proposta
+A simulação deve apresentar valor solicitado,
+quantidade de parcelas, valor da parcela e condições de custo.
+
+Este catálogo não contém taxa de juros fixa,
+CET padrão ou tabela universal de parcelas.
+
+Alterações na proposta exigem nova simulação.
+Não se deve prometer manutenção de parcela ou custo
+após alteração de prazo ou valor.
+
+3. RENEGOCIAÇÃO DE CRÉDITO PESSOAL
+
+[CAT06] Identificação e finalidade
+Código: REN-CP.
+Público: Titulares de contrato existente de crédito pessoal
+sem garantia do Banco Aurora.
+
+Finalidade: Reorganização das condições de pagamento
+de um contrato existente.
+
+A renegociação não prevê liberação de dinheiro novo.
+Seu ponto de partida é o saldo atualizado informado
+na simulação, e não o principal originalmente contratado.
+
+[CAT07] Política aplicável
+As condições de atraso, entrada, prazo e comprometimento
+estão definidas na política REN-001.
+
+Os parâmetros de novo crédito pessoal não devem ser
+transferidos automaticamente para renegociação.
+
+Pedidos que combinem reorganização de dívida e solicitação
+de recursos adicionais exigem esclarecimento do atendimento.
+Esta base não estabelece uma operação combinada.
+
+4. IDENTIFICAÇÃO DA NECESSIDADE
+
+[CAT08] Distinção entre operações
+Quando a solicitação envolver recursos novos,
+deve ser verificada a aderência ao produto CP-SG.
+
+Quando envolver alteração do pagamento de contrato existente,
+deve ser consultada a política REN-001.
+
+Se a solicitação não esclarecer a finalidade,
+o atendimento deve confirmar a operação pretendida
+antes de aplicar limites e requisitos.
+
+5. MODALIDADES NÃO DOCUMENTADAS
+
+[CAT09] Limites de cobertura
+Esta base não contém políticas completas para:
+- Crédito consignado.
+- Financiamento de veículos.
+- Financiamento imobiliário.
+- Crédito empresarial.
+- Crédito com garantia de imóvel.
+- Crédito rotativo de cartão.
+
+A ausência de documentação não permite concluir
+se essas modalidades são ou não comercializadas.
+
+O atendimento deve consultar o canal responsável,
+sem extrapolar as condições do CP-SG.
+
+[CAT10] Comparação entre modalidades
+Comparações devem utilizar apenas condições documentadas.
+
+Não é permitido atribuir taxas, vantagens, prazos
+ou exigências a modalidades sem referência disponível.
+
+Quando a informação for insuficiente, a limitação
+deve ser explicitada.
+
+6. REFERÊNCIAS E CONFLITOS
+
+[CAT11] Documentos relacionados
+POL-CP-001: critérios de novo crédito pessoal.
+DOC-001: documentação e conferência cadastral.
+REN-001: renegociação de contratos.
+FAQ-001: orientações de atendimento.
+
+O catálogo resume características dos produtos.
+Os critérios detalhados devem ser consultados
+na política correspondente.
+
+[CAT12] Divergências documentais
+Antes de caracterizar um conflito, devem ser comparados
+produto, situação contratual, versão e vigência.
+
+Regras distintas para modalidades diferentes
+não constituem necessariamente inconsistência.
+
+Se houver divergência sobre a mesma condição aplicável,
+o atendimento deve registrar as fontes e solicitar conferência.
+Não deve selecionar silenciosamente a regra mais favorável.
+
+[CAT13] Prazos de atendimento
+Este catálogo não estabelece prazo garantido para aprovação,
+liberação de recursos ou conclusão de renegociação.
+
+Qualquer previsão individual deve ser obtida
+no atendimento responsável pela operação.

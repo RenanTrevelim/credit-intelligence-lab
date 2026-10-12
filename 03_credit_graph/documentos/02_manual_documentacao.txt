@@ -1,0 +1,175 @@
+BANCO AURORA
+MANUAL DE DOCUMENTAÇÃO E CONFERÊNCIA CADASTRAL
+
+Código: DOC-001
+Versão: 1.0
+Início de vigência: 01/10/2026
+Área responsável: Cadastro e Operações de Crédito
+Classificação: Uso interno
+
+1. OBJETIVO
+
+[DOC01] Abrangência
+Definir os requisitos documentais para encaminhamento
+de propostas de crédito pessoal sem garantia e de
+renegociação abrangidas pelas políticas POL-CP-001 e REN-001.
+
+O recebimento de documentos não significa validação,
+autenticação ou aprovação da operação.
+
+2. IDENTIFICAÇÃO DO PROPONENTE
+
+[DOC02] Documentos aceitos
+Deve ser apresentado um dos seguintes documentos:
+- Carteira de Identidade Nacional.
+- Registro Geral legível, com fotografia que permita identificação.
+- Carteira Nacional de Habilitação dentro da validade.
+
+O CPF deve constar no documento ou ser apresentado
+em comprovante complementar.
+
+Devem estar disponíveis para conferência:
+nome completo, CPF, data de nascimento e fotografia.
+
+[DOC03] Divergências cadastrais
+Divergências entre os documentos e o cadastro devem ser
+registradas como pendência de atualização.
+
+Não é permitido presumir a informação correta,
+substituir dados sem confirmação ou considerar
+uma divergência resolvida apenas por interpretação textual.
+
+A conferência deve ser realizada pelo atendimento responsável.
+
+3. COMPROVAÇÃO DE RENDA
+
+[DOC04] Assalariados
+São exigidos os dois últimos comprovantes mensais
+de pagamento disponíveis.
+
+Os documentos devem identificar o titular, a fonte pagadora,
+o período de referência e o valor líquido recebido.
+
+Extratos bancários dos mesmos períodos poderão ser
+solicitados para esclarecimento de divergências.
+Sua apresentação não substitui automaticamente
+os comprovantes de pagamento.
+
+[DOC05] Aposentados e pensionistas
+São exigidos os dois últimos comprovantes mensais
+do benefício, com identificação do titular,
+da fonte pagadora, do período e do valor líquido.
+
+A condição de beneficiário não altera automaticamente
+a modalidade para crédito consignado.
+
+O produto deve ser identificado conforme a solicitação
+e a simulação apresentada.
+
+[DOC06] Profissionais autônomos
+São exigidos:
+- Extratos dos três últimos meses completos.
+- Declaração da atividade exercida.
+- Declaração da renda líquida mensal.
+
+Comprovantes de recebimentos poderão ser solicitados
+para esclarecimento da origem dos recursos.
+
+Transferências entre contas próprias, recursos de empréstimos
+e créditos sem relação demonstrada com a atividade não devem
+ser tratados automaticamente como renda profissional.
+
+O total de entradas bancárias não equivale à renda líquida.
+O valor aceito depende da conferência do analista.
+
+[DOC07] Rendimentos variáveis
+Oscilações relevantes entre os períodos apresentados
+devem ser encaminhadas para avaliação.
+
+Este manual não estabelece fórmula de média,
+redutor ou escolha do maior rendimento para definição
+automática da renda aceita.
+
+O assistente deve informar a necessidade de conferência,
+sem produzir uma renda presumida para enquadrar a proposta.
+
+4. COMPROVAÇÃO DE RESIDÊNCIA
+
+[DOC08] Documentos aceitos
+São aceitos comprovantes emitidos nos últimos 90 dias:
+- Conta de água.
+- Conta de energia elétrica.
+- Conta de internet fixa.
+- Fatura de telefonia fixa.
+
+O documento deve conter endereço completo.
+A idade do comprovante é contada em relação à data
+de apresentação.
+
+[DOC09] Documento em nome de terceiro
+Quando o comprovante estiver em nome de terceiro,
+deve ser apresentada declaração de residência assinada
+pelo proponente, indicando o vínculo com o titular.
+
+O comprovante deve atender aos requisitos de DOC08.
+A documentação permanece sujeita à conferência.
+
+5. QUALIDADE E TRATAMENTO DE PENDÊNCIAS
+
+[DOC10] Integridade documental
+Os arquivos devem estar completos, legíveis e sem cortes
+que ocultem informações necessárias à análise.
+
+Quando houver documento ilegível, incompleto ou incompatível
+com o requisito solicitado, deve ser indicada a necessidade
+de reapresentação.
+
+Não se deve afirmar autenticidade documental com base
+apenas na leitura do conteúdo de um arquivo.
+
+[DOC11] Registro da situação documental
+A situação de cada requisito deve distinguir:
+- Não apresentado.
+- Recebido, com conferência pendente.
+- Com necessidade de reapresentação ou esclarecimento.
+- Conferido pela área responsável.
+
+O assistente somente pode informar uma situação de conferência
+quando houver registro explícito dessa condição.
+
+A ausência de documentos não impede orientações gerais
+ou cálculos baseados em dados declarados.
+Esses resultados devem permanecer identificados como preliminares.
+
+6. DOCUMENTAÇÃO PARA RENEGOCIAÇÃO
+
+[DOC12] Requisitos específicos
+Para renegociação, são necessários:
+- Documento de identificação conforme DOC02.
+- Identificação do contrato.
+- Comprovação atual de renda conforme o perfil profissional.
+
+O comprovante de residência deverá ser atualizado
+quando houver alteração de endereço ou pendência cadastral.
+
+Saldo atualizado, entrada, prazo e parcela do acordo
+devem ser obtidos na simulação de renegociação.
+
+7. LIMITES E ENCAMINHAMENTO
+
+[DOC13] Documentação e decisão de crédito
+A entrega completa da documentação não garante aprovação
+de nova operação ou aceitação de renegociação.
+
+A análise depende da consistência das informações,
+das condições da operação e da política aplicável.
+
+[DOC14] Situações não previstas
+Documentos alternativos e situações não contempladas
+devem ser encaminhados à área de Cadastro.
+
+Este manual não define prazo garantido de análise,
+taxa de juros, CET ou critérios de pontuação de crédito.
+
+Não cabe ao assistente criar requisitos adicionais
+ou dispensar documentos previstos neste manual.

@@ -1,0 +1,198 @@
+BANCO AURORA
+POLÍTICA DE RENEGOCIAÇÃO DE CRÉDITO PESSOAL
+
+Código: REN-001
+Versão: 1.0
+Início de vigência: 01/10/2026
+Área responsável: Recuperação de Crédito
+Classificação: Uso interno
+Serviço: REN-CP — Renegociação de Crédito Pessoal
+
+1. OBJETIVO E ABRANGÊNCIA
+
+[REN01] Contratos abrangidos
+Estabelecer critérios para encaminhamento de renegociação
+de contratos de crédito pessoal sem garantia do Banco Aurora.
+
+O fluxo regular contempla um contrato por proposta.
+Não estão previstas consolidação de múltiplos contratos,
+compra de dívida externa ou liberação de recursos adicionais.
+
+Contratos de outras modalidades exigem política específica.
+
+[REN02] Base da negociação
+A proposta deve utilizar o saldo atualizado apresentado
+na simulação de renegociação.
+
+O saldo não deve ser estimado pelo principal original,
+pela soma das parcelas vencidas ou por cálculo
+sem referência contratual atualizada.
+
+Pagamentos posteriores à simulação exigem atualização
+do saldo antes da formalização.
+
+2. SEGMENTAÇÃO POR SITUAÇÃO CONTRATUAL
+
+[REN03] Contrato adimplente
+Relatos de dificuldade futura de pagamento devem ser
+encaminhados para análise preventiva.
+
+As condições numéricas do fluxo regular para contratos
+em atraso não se aplicam automaticamente a contratos em dia.
+
+Não há condição preventiva padronizada neste documento.
+
+[REN04] Atraso de 1 a 90 dias
+Contratos com atraso de 1 a 90 dias, incluindo os limites,
+podem ser encaminhados ao fluxo regular.
+
+A contagem considera a parcela vencida mais antiga
+ainda não regularizada, na data de referência da análise.
+
+O enquadramento temporal não garante aceitação
+e deve ser combinado com os demais requisitos.
+
+[REN05] Atraso superior a 90 dias
+Contratos com mais de 90 dias de atraso devem ser
+encaminhados à análise especializada de Recuperação de Crédito.
+
+As condições do fluxo regular não representam oferta
+garantida para esse segmento.
+
+Descontos, entrada e prazo dependem de avaliação específica,
+não definida nesta política.
+
+3. CONDIÇÕES DO FLUXO REGULAR
+
+[REN06] Entrada
+A entrada mínima é de 10% do saldo atualizado
+da simulação de renegociação.
+
+Uma entrada superior poderá ser considerada na simulação.
+Não existe dispensa automática de entrada neste fluxo.
+
+A entrada é um desembolso pontual e não integra
+o cálculo das parcelas mensais recorrentes.
+Sua disponibilidade deve ser avaliada separadamente.
+
+[REN07] Prazo
+O saldo a parcelar após a entrada poderá ser reorganizado
+em 6 a 48 parcelas mensais fixas, incluindo os limites.
+
+A concessão do prazo máximo não é automática.
+A proposta depende de simulação e análise.
+
+O limite de 36 parcelas do novo crédito pessoal
+não se aplica ao fluxo regular de renegociação.
+
+[REN08] Parcela e condições de custo
+A parcela do acordo deve constar em simulação bancária.
+
+Não é permitido dividir o saldo pelo prazo para presumir
+o valor da prestação.
+
+Este documento não fixa taxa de juros, CET,
+percentual de desconto ou redução mínima de parcela.
+
+4. CAPACIDADE DE PAGAMENTO
+
+[REN09] Comprometimento após o acordo
+O comprometimento após a renegociação deve ser
+menor ou igual a 40% da renda líquida mensal.
+
+O cálculo considera:
+parcelas de outras operações que permanecerão ativas
+mais a nova parcela do acordo, divididas pela renda
+líquida mensal e multiplicadas por 100.
+
+A parcela antiga do contrato renegociado deve ser excluída
+quando substituída pelo acordo, evitando dupla contagem.
+
+A comparação deve utilizar o resultado sem arredondamento.
+O limite de 35% do novo crédito pessoal não deve ser
+aplicado a esta operação.
+
+[REN10] Interpretação do indicador
+O atendimento ao limite de comprometimento não comprova,
+isoladamente, a sustentabilidade do acordo.
+
+Devem ser consideradas as informações de renda,
+as demais obrigações declaradas e a disponibilidade
+para pagamento da entrada.
+
+O indicador não representa classificação de risco
+ou probabilidade de recuperação do contrato.
+
+5. INFORMAÇÕES E DOCUMENTAÇÃO
+
+[REN11] Dados necessários
+O encaminhamento requer:
+- Identificação do contrato.
+- Data de referência e quantidade de dias de atraso.
+- Saldo atualizado da simulação.
+- Renda líquida mensal.
+- Parcelas de outras operações que permanecerão ativas.
+- Valor da entrada proposta.
+- Quantidade de parcelas do acordo.
+- Valor da nova parcela simulada.
+
+Informações ausentes devem ser registradas como pendências.
+Não se deve presumir saldo, atraso, entrada ou capacidade
+de pagamento para completar a proposta.
+
+[REN12] Requisitos documentais
+Devem ser apresentados identificação e comprovantes
+de renda conforme DOC-001.
+
+A identificação do contrato é obrigatória.
+A atualização de residência deve observar DOC12
+quando houver mudança de endereço ou pendência cadastral.
+
+6. VALORES DO ACORDO
+
+[REN13] Total previsto de pagamentos
+Quando houver entrada e parcelas fixas,
+o total previsto do acordo corresponde à entrada
+mais o valor da parcela multiplicado pela quantidade.
+
+O indicador se refere aos pagamentos previstos
+no novo acordo.
+
+Não representa o custo histórico do contrato original
+e não inclui automaticamente pagamentos anteriores.
+
+[REN14] Descontos e encargos
+Nenhum desconto, perdão de encargos ou redução de juros
+deve ser apresentado sem previsão na simulação.
+
+Diferenças monetárias entre saldos e pagamentos
+não devem ser descritas como taxa de juros ou CET.
+
+7. CONTROLES E FORMALIZAÇÃO
+
+[REN15] Adequação das ferramentas de cálculo
+Rotinas destinadas a novo crédito sem entrada não devem
+ser utilizadas automaticamente para calcular renegociação.
+
+A rotina deve representar entrada, saldo atualizado
+e substituição da parcela anterior.
+
+Na ausência de ferramenta compatível, o assistente
+deve limitar-se à explicação das regras e informar
+a necessidade de cálculo pelo atendimento.
+
+[REN16] Encaminhamento e aceitação
+Uma proposta encaminhada não constitui acordo formalizado.
+
+A renegociação depende de conferência, simulação
+e aceitação formal das condições aplicáveis.
+
+Não há autorização para o assistente conceder exceções
+ou assumir compromissos em nome da instituição.
+
+[REN17] Informações não estabelecidas
+Esta política não define prazo garantido de conclusão,
+prazo de atualização de registros externos
+ou condições para contratos fora de sua abrangência.
+
+Essas informações devem ser obtidas com a área responsável.
