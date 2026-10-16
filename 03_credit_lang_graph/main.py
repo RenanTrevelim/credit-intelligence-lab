@@ -158,6 +158,57 @@ def recuperar_contexto(pergunta, banco):
 
     return contexto
 
+# ==================================================
+# 5. CRIANDO O MODELO
+# ==================================================
+
+def criar_modelo():
+    """Criando o modelo GROQ para chamar nas respostas."""
+
+    load_dotenv()
+
+    if not os.getenv("GROQ_API_KEY"):
+        raise ValueError("Configure GROQ_API_KEY no arquivo .env")
+
+    modelo = ChatGroq(model="openai/gpt-oss-20b", temperature=0)
+
+    return modelo
+
+# ==================================================
+# 6. CRIANDO CLASSE PYDANTIC
+# ==================================================
+
+class RespostaRag(BaseModel):
+    """Organizando a resposta com base nos documentos recuperados."""
+
+    assunto: str = Field(
+        description=(
+            "Assunto principal identificado no contexto. Retorne vazio se não encontrar."
+        )
+    )
+
+    resposta: str = Field(
+        description=(
+            "Resposta objetiva à pergunta, baseada exclusivamente no contexto recuperado. "
+            "Caso o contexto não ter base suficiente, apenas retorne que não foi possível "
+            "responder a pergunta que o cliente fez."
+        )
+    )
+
+    fontes : str = Field(
+        description=(
+            "Retorne as Fontes que o contexto conseguiu recuperar. "
+            "Caso não tenha, retorne null"
+        )
+    )
+
+# ==================================================
+# 7. CRIANDO CHAIN DO RAG
+# ==================================================
+
+def criar_chain_rag(modelo):
+    """Responde a pergunta com base no contexto recuperado."""
+
 documentos = carregar_documentos()
 trechos = dividir_documentos(documentos)
 banco = criar_banco(trechos)
