@@ -1,28 +1,23 @@
 # ==================================================
 # CONFIGURAÇÃO E CAMINHOS
 # ==================================================
-
 import os
 from pathlib import Path
-
 from dotenv import load_dotenv
 
 # ==================================================
 # VALORES FINANCEIROS
 # ==================================================
-
 from decimal import Decimal, ROUND_HALF_UP
 
 # ==================================================
 # VALIDAÇÃO COM PYDANTIC
 # ==================================================
-
 from pydantic import BaseModel, Field, ValidationError
 
 # ==================================================
 # MODELO, PROMPTS E FERRAMENTAS
 # ==================================================
-
 from langchain_groq import ChatGroq
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.tools import tool
@@ -35,33 +30,28 @@ from langchain_core.prompts import MessagesPlaceholder
 # ==================================================
 # DOCUMENTOS E DIVISÃO EM CHUNKS
 # ==================================================
-
 from langchain_core.documents import Document
+from langchain_community.document_loaders import PyPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 # ==================================================
 # EMBEDDINGS E BANCO VETORIAL
 # ==================================================
-
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_community.vectorstores import FAISS
 
 # ==================================================
 # ESTADO E GRAFO
 # ==================================================
-
 import operator
 from typing import Annotated, TypedDict
-
 from langgraph.graph import StateGraph, START, END
 
 # ==================================================
 # CAMINHOS DO PROJETO
 # ==================================================
-
 PASTA_PROJETO = Path(__file__).resolve().parent
 PASTA_DOCUMENTOS = PASTA_PROJETO / "documentos"
-
 
 # ==================================================
 # 1. CRIANDO A CLASSE PROPOSTA DE CRÉDITO
