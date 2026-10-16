@@ -71,7 +71,6 @@ def carregar_documentos():
             documentos.append(pagina)
 
     print(f"PDS encontrados -> {len(arquivos)}")
-    print(f"Páginas com textos -> {len(paginas)}")
 
     return documentos
 # ==================================================
@@ -82,13 +81,13 @@ def dividir_documentos(documentos):
     """Iremos dividir os documentos preservando seus metadados."""
 
     divisor = RecursiveCharacterTextSplitter(
-        chunk_size=850,
-        chunk_overlap=300
+        chunk_size=950,
+        chunk_overlap=350
     )
 
     trechos = divisor.split_documents(documentos)
 
-    print(f"\nTotal de Documentos Carregados -> {len(documentos)}")
+    print(f"\nTotal de Páginas com Texto -> {len(documentos)}")
     print(f"\nTotal de Trechos Dividios -> {len(trechos)}")
 
     return trechos
