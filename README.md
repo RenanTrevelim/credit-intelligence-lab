@@ -225,17 +225,32 @@ python -m pip install -r requirements.txt
 
 O `requirements.txt` registra versões do ambiente de desenvolvimento. A instalação em um ambiente limpo ainda precisa ser validada; pacotes binários como FAISS e PyTorch dependem da compatibilidade entre Python e sistema operacional.
 
-### 3. Configurar a API
+### 3. Configurar a API GROQ
 
-Crie um arquivo `.env` na raiz:
+1. Crie uma chave de API em https://console.groq.com/keys.
+2. Copie `.env.example` para `.env`.
+
+No Windows, pelo CMD:
+
+```bat
+copy .env.example .env
+```
+
+No Linux ou macOS:
+
+```bash
+cp .env.example .env
+```
+
+3. Abra o `.env` e preencha sua chave:
 
 ```dotenv
 GROQ_API_KEY=sua_chave_aqui
 ```
 
-O `.env` está incluído no `.gitignore`. Não publique sua chave.
+O projeto carrega essa configuração com `load_dotenv()`.
 
-É necessário acesso à internet para utilizar a API Groq e baixar o modelo de embeddings na primeira execução.
+O modelo utilizado é `openai/gpt-oss-20b`, configurado na função `criar_modelo()`.
 
 ### 4. Executar a aplicação principal
 
