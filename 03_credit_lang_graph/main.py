@@ -848,7 +848,7 @@ def calcular(estado: EstadoConsulta):
     print("\n[CÁLCULOS]: Extraindo dados e executando as ferramentas ...")
 
     proposta = extrator.invoke({
-        "pergunta": estado["mensagem"]
+        "mensagem": estado["mensagem"]
     })
 
     resultado = resposta_agente.invoke({
