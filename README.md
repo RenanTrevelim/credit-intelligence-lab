@@ -1,94 +1,122 @@
 # Credit Intelligence Lab
-### Assistente de IA para atendimento em cooperativas e análise de propostas de crédito
 
-Um assistente que entende a solicitação do cooperado, identifica se precisa **consultar documentos, calcular indicadores financeiros ou combinar as duas tarefas** e organiza uma resposta com fontes e registro das etapas executadas.
+### Assistente de IA para cooperativas: documentos, cálculos e conversa com histórico
 
-O projeto integra **LangChain, LangGraph, Pydantic e RAG** em um cenário de atendimento financeiro. A aplicação principal reúne consulta a políticas em PDF e um agente com ferramentas de cálculo, demonstrando como diferentes componentes de IA podem trabalhar em um fluxo orientado à necessidade do usuário.
+**Um chatbot que consulta documentos em PDF, calcula indicadores financeiros e acompanha alterações de uma proposta ao longo da conversa.**
 
-> **Aplicação principal:** [`03_credit_lang_graph`](03_credit_lang_graph/) — integração de classificação de intenção, consulta documental e cálculos financeiros com orquestração condicional.
+O projeto combina **LangChain, LangGraph, Pydantic, RAG e Streamlit** para interpretar a necessidade do cooperado e encaminhar o atendimento para consulta documental, cálculo ou ambos.
+
+O repositório contém **três projetos progressivos**. A aplicação final reúne os componentes desenvolvidos nas etapas anteriores em uma interface de conversa.
+
+> **Conheça a aplicação principal:** [`03_credit_lang_graph/`](03_credit_lang_graph/)
 
 ![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white)
+![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?logo=streamlit&logoColor=white)
 ![LangChain](https://img.shields.io/badge/LangChain-1C3C3C)
 ![LangGraph](https://img.shields.io/badge/LangGraph-1C3C3C)
 ![Pydantic](https://img.shields.io/badge/Pydantic-E92063?logo=pydantic&logoColor=white)
-![RAG](https://img.shields.io/badge/RAG-Consulta_documental-2563EB)
 ![FAISS](https://img.shields.io/badge/FAISS-Busca_vetorial-2563EB)
+
+## Aplicação em funcionamento
+
+<img width="593" height="625" alt="Captura de tela 2026-11-03 110646" src="https://github.com/user-attachments/assets/6f439536-6b39-4cd6-a19b-61083f527527" />
+
+*Consulta em linguagem natural com indicadores calculados por ferramentas Python. Dados extraídos, trechos recuperados e caminho percorrido ficam disponíveis em painéis expansíveis.*
+
+O cenário utiliza a **Cooperativa Aurora**, instituição fictícia criada para fins educacionais. Os documentos não representam políticas de Sicoob, Sicredi, Cresol ou outras instituições reais.
+
+## Evolução do projeto
+
+Cada diretório representa uma etapa de aprendizado e construção da solução.
+
+| Etapa | Projeto | Objetivo |
+|---|---|---|
+| **01** | [Agente com ferramentas](01_credit_tools/) | Extrair dados com Pydantic e executar cálculos financeiros por meio de um agente LangChain. |
+| **02** | [Consulta documental com RAG](02_credit_rag/) | Recuperar informações de PDFs e responder com referências às fontes. |
+| **03** | [Assistente integrado](03_credit_lang_graph/) | Integrar consulta, cálculos, histórico e roteamento com LangGraph em uma interface Streamlit. |
+
+**O terceiro projeto é a aplicação final e o principal destaque do repositório.**
 
 ## O que o assistente faz?
 
-O usuário descreve sua necessidade em linguagem natural. A aplicação identifica o caminho de atendimento e utiliza os componentes necessários para responder.
-
-| Solicitação | Como o assistente atua |
+| Necessidade | Comportamento |
 |---|---|
-| “Quais documentos preciso apresentar para me associar como MEI?” | Pesquisa os PDFs e responde com referência ao documento e à página. |
-| “Qual será meu comprometimento de renda com essa proposta?” | Extrai os dados financeiros e aciona ferramentas de cálculo. |
-| “Calcule os indicadores e consulte os limites da política.” | Executa a consulta documental e os cálculos, apresentando os resultados em uma resposta organizada. |
-| “Pode resolver isso para mim?” | Solicita detalhes para compreender a necessidade. |
+| Consultar documentos | Pesquisa os PDFs e apresenta orientações com referências ao arquivo e à página. |
+| Calcular indicadores | Extrai os dados da proposta e aciona ferramentas financeiras. |
+| Consultar e calcular | Executa as duas etapas e reúne os resultados. |
+| Continuar uma conversa | Utiliza o histórico para compreender referências e alterações na mesma proposta. |
+| Esclarecer uma solicitação | Solicita detalhes quando não consegue identificar um caminho de atendimento. |
 
-O cenário utiliza a **Cooperativa Aurora**, uma instituição fictícia com documentos próprios para demonstração. Suas regras não representam políticas de cooperativas reais.
+Na interface, o usuário também pode:
 
-## O problema que motivou o projeto
+- Conferir os trechos recuperados dos documentos.
+- Visualizar os dados utilizados nos cálculos.
+- Acompanhar o caminho percorrido pelo grafo.
+- Iniciar uma nova conversa, limpando o histórico.
 
-O atendimento financeiro reúne tarefas que exigem diferentes formas de processamento: interpretar mensagens, localizar regras, identificar dados ausentes e calcular indicadores.
+## Arquitetura da aplicação final
 
-Uma pergunta sobre documentação exige consulta à base de conhecimento. Uma análise de comprometimento exige dados estruturados e operações matemáticas. Uma solicitação mais completa pode precisar das duas etapas.
-
-Este projeto organiza essas necessidades em um fluxo que permite:
-
-- **Consultar informações com referências:** localizar orientações nos documentos e apresentar arquivo e página.
-- **Separar interpretação e cálculo:** utilizar o modelo para compreender a mensagem e funções Python para executar a aritmética.
-- **Trabalhar com informações incompletas:** produzir os indicadores possíveis e explicar o que ficou indisponível.
-- **Encaminhar a solicitação conforme sua intenção:** escolher entre consulta, cálculo, combinação ou esclarecimento.
-- **Acompanhar a execução:** exibir o caminho percorrido e o motivo da classificação.
-
-Essas capacidades são demonstradas no código; ganhos de produtividade e qualidade ainda não foram medidos em uma operação real.
-
-## Destaque: aplicação integrada com LangGraph
-
-A aplicação [`03_credit_lang_graph`](03_credit_lang_graph/) concentra a evolução do repositório.
-
-O **LangGraph** coordena as etapas e mantém o estado da solicitação. As chains de **LangChain** realizam classificação, extração e consulta documental. O agente utiliza ferramentas para calcular os indicadores financeiros.
+O fluxo começa pela interpretação da mensagem com apoio do histórico. Em seguida, a classificação define quais componentes serão utilizados.
 
 ```mermaid
 flowchart TD
-    A["Mensagem do cooperado"] --> B["Classificar intenção"]
+    A["Mensagem e histórico"] --> B["Interpretar solicitação"]
+    B --> C{"Classificar intenção"}
 
-    B -->|Consulta| C["Pesquisar PDFs e gerar resposta documental"]
-    B -->|Cálculo| D["Extrair proposta e executar ferramentas"]
-    B -->|Consulta e cálculo| C
-    B -->|Esclarecimento| E["Solicitar mais detalhes"]
+    C -->|Consulta| D["Pesquisar PDFs e responder com RAG"]
+    C -->|Consulta e cálculo| D
+    C -->|Cálculo| E["Extrair proposta e executar agente"]
+    C -->|Esclarecimento| F["Solicitar mais detalhes"]
 
-    C --> F{"Também precisa calcular?"}
-    F -->|Sim| D
-    F -->|Não| G["Organizar resposta e fontes"]
-    D --> G
-
-    G --> H["Exibir resposta e trilha"]
+    D --> G{"Também precisa calcular?"}
+    G -->|Sim| E
+    G -->|Não| H["Organizar resposta"]
     E --> H
+
+    H --> I["Exibir resposta e guardar interação"]
+    F --> I
 ```
 
-### Etapas do processamento
+### Responsabilidade dos componentes
 
-| Etapa | Responsabilidade |
+| Componente | Responsabilidade |
 |---|---|
-| **Classificação** | Identificar a intenção e retornar um caminho válido acompanhado de uma justificativa. |
-| **Consulta documental** | Recuperar trechos dos PDFs e gerar uma resposta apoiada no contexto. |
-| **Extração** | Transformar a mensagem em uma proposta estruturada com Pydantic. |
-| **Cálculo** | Executar as ferramentas aplicáveis aos dados disponíveis. |
-| **Finalização** | Reunir as respostas e preservar as fontes documentais. |
-| **Trilha** | Registrar as etapas realizadas durante aquela execução. |
+| **Interpretador** | Compreender a mensagem atual usando referências e dados pertinentes do histórico. |
+| **Classificador** | Selecionar consulta, cálculo, consulta com cálculo ou esclarecimento. |
+| **RAG** | Recuperar trechos e produzir uma resposta apoiada nos documentos. |
+| **Extrator** | Organizar as informações no esquema `PropostaCredito`. |
+| **Agente** | Acionar as ferramentas aplicáveis aos dados disponíveis. |
+| **Finalização** | Reunir os resultados documentais e financeiros. |
+| **Streamlit** | Exibir a conversa, manter o histórico da sessão e apresentar os detalhes da execução. |
 
-No caminho combinado, a consulta ocorre antes dos cálculos. A finalização reúne os resultados sem uma nova chamada ao modelo.
+No caminho combinado, a consulta documental ocorre antes dos cálculos. A finalização reúne os resultados sem uma nova chamada ao modelo.
 
-**A apresentação conjunta de políticas e indicadores não realiza uma verificação automática de enquadramento nem representa aprovação de crédito.**
+> Apresentar regras e indicadores juntos não equivale a verificar automaticamente o enquadramento da proposta nem representa aprovação de crédito.
+
+## Histórico da conversa
+
+A aplicação mantém as mensagens em `st.session_state` e envia o histórico ao grafo a cada solicitação.
+
+O interpretador utiliza esse histórico para compreender perguntas complementares e atualizar os dados da mesma proposta.
+
+**Exemplo:**
+
+1. O usuário informa renda, parcelas existentes e condições do crédito.
+2. Depois pergunta: “E se a parcela proposta passar para R$ 900?”.
+3. O interpretador deve preservar os demais dados e substituir a parcela.
+4. O agente executa novamente os cálculos.
+
+As mensagens anteriores ajudam a compreender a solicitação, mas não substituem os documentos como evidência das políticas.
+
+A memória é mantida durante a sessão, sem armazenamento persistente das conversas. O botão **Nova conversa** limpa o histórico.
 
 ## Demonstração dos indicadores
 
-**Solicitação de exemplo:**
+### Solicitação inicial
 
 > Minha renda líquida mensal é R$ 5.500 e pago R$ 700 em parcelas existentes. Tenho uma proposta de crédito pessoal sem entrada de R$ 15.000, em 24 parcelas fixas de R$ 850. Calcule meu comprometimento de renda, a renda restante e o total a pagar.
 
-**Resultados aritméticos esperados:**
+### Resultados esperados
 
 | Indicador | Resultado |
 |---|---:|
@@ -99,100 +127,113 @@ No caminho combinado, a consulta ocorre antes dos cálculos. A finalização re�
 | Total a pagar da nova proposta | R$ 20.400,00 |
 | Diferença em relação ao valor solicitado | R$ 5.400,00 |
 
-O exemplo serve como referência para conferir os cálculos, não como registro de teste automatizado.
+### Continuação da conversa
 
-A renda restante considera apenas as parcelas de crédito informadas. A diferença entre o total das parcelas e o valor solicitado não representa taxa de juros nem CET.
+> E se a parcela proposta passar para R$ 900? Recalcule todos os indicadores dessa mesma proposta.
+
+Mantendo os demais dados:
+
+| Indicador atualizado | Resultado |
+|---|---:|
+| Comprometimento após a proposta | 29,09% |
+| Renda restante após a proposta | R$ 3.900,00 |
+| Total a pagar da nova proposta | R$ 21.600,00 |
+| Diferença em relação ao valor solicitado | R$ 6.600,00 |
 
 ### Ferramentas disponíveis
 
 | Ferramenta | Finalidade |
 |---|---|
-| `calcular_comprometimento_renda` | Calcular o percentual da renda comprometido antes e depois da proposta. |
-| `calcular_fluxo_mensal` | Calcular a renda restante após o pagamento das parcelas. |
-| `calcular_total_proposta` | Calcular a soma das novas parcelas e a diferença em relação ao valor solicitado. |
+| `calcular_comprometimento_renda` | Calcular o percentual de renda comprometida antes e depois da proposta. |
+| `calcular_fluxo_mensal` | Calcular a renda restante após as parcelas de crédito. |
+| `calcular_total_proposta` | Calcular o total das novas parcelas e a diferença sobre o valor solicitado. |
 
-As ferramentas utilizam `Decimal` e contemplam resultados parciais. Sem o valor da nova parcela, por exemplo, ainda é possível calcular o comprometimento atual quando renda e parcelas existentes estão disponíveis.
+As ferramentas utilizam `Decimal` e permitem resultados parciais quando existem dados suficientes. Sem a nova parcela, por exemplo, ainda é possível calcular os indicadores atuais quando renda e parcelas existentes estão disponíveis.
 
-O escopo dos cálculos é **novo crédito pessoal com parcelas mensais fixas e sem entrada**.
+**Escopo:** novo crédito pessoal com parcelas mensais fixas e sem entrada.
+
+A renda restante não considera outras despesas pessoais. A diferença monetária não representa taxa de juros nem CET.
 
 ## Consulta documental com RAG
 
-A base contém seis PDFs que representam diferentes necessidades do atendimento em uma cooperativa:
+A aplicação final utiliza seis PDFs:
 
 | Documento | Tema |
 |---|---|
 | `01_conhecendo_a_cooperativa.pdf` | Cooperativismo, participação e relacionamento. |
 | `02_associacao_conta_cadastro.pdf` | Associação, documentação e atualização cadastral. |
 | `03_produtos_servicos.pdf` | Produtos e serviços. |
-| `04_solicitacao_credito.pdf` | Solicitação e condições de crédito pessoal. |
+| `04_solicitacao_credito.pdf` | Solicitação de crédito pessoal. |
 | `05_dificuldade_pagamento_renegociacao.pdf` | Dificuldades de pagamento e renegociação. |
-| `06_seguranca_atendimento.pdf` | Segurança e orientações de atendimento. |
+| `06_seguranca_atendimento.pdf` | Segurança e atendimento. |
 
-### Como os documentos são utilizados
+### Processamento dos documentos
 
-1. O `PyPDFLoader` lê os arquivos por página.
-2. O conteúdo é dividido em trechos com sobreposição.
-3. Os trechos recebem embeddings e são indexados em FAISS.
-4. A pergunta é utilizada para recuperar os trechos por similaridade.
-5. O modelo produz uma resposta estruturada com base no contexto recuperado.
+1. Leitura dos PDFs por página com `PyPDFLoader`.
+2. Preservação dos metadados de fonte, página, título e assunto.
+3. Divisão do texto em trechos com sobreposição.
+4. Geração local de embeddings.
+5. Indexação e busca por similaridade com FAISS.
+6. Geração de resposta estruturada com base nos trechos recuperados.
 
-Os metadados preservam **nome do arquivo, página, título e assunto**.
-
-Na aplicação integrada, a configuração utiliza:
+### Configuração da aplicação final
 
 | Parâmetro | Configuração |
 |---|---|
 | Tamanho dos trechos | 900 caracteres |
 | Sobreposição | 350 caracteres |
-| Trechos recuperados | Até 5 por consulta |
-| Embeddings | `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2` |
+| Recuperação | Até 5 trechos por consulta |
+| Modelo de embeddings | `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2` |
 | Execução dos embeddings | CPU, com normalização |
-| Índice vetorial | FAISS |
+| Banco vetorial | FAISS |
 
-A saída documental é organizada em `assunto`, `resposta` e `fontes`. Informações insuficientes devem ser comunicadas ao usuário: não localizar uma regra nos trechos recuperados não significa que ela inexista em toda a documentação.
+A resposta documental é organizada em `assunto`, `resposta` e `fontes`.
 
-## Tecnologias e decisões de implementação
+Quando não há evidências suficientes, o assistente é orientado a comunicar a limitação. Não localizar uma informação nos trechos recuperados não significa que ela inexista em toda a documentação.
 
-| Tecnologia | Aplicação no projeto |
+## Tecnologias utilizadas
+
+| Tecnologia | Aplicação |
 |---|---|
-| **Python** | Implementação dos fluxos e das ferramentas financeiras. |
-| **LangChain** | Composição de prompts, modelos, chains e agente com ferramentas. |
-| **LangGraph** | Estado compartilhado e roteamento condicional. |
-| **Pydantic** | Validação dos formatos de entrada e saída. |
+| **Python** | Implementação dos fluxos e cálculos. |
+| **Streamlit** | Interface de conversa e histórico da sessão. |
+| **LangChain** | Prompts, chains e agente com ferramentas. |
+| **LangGraph** | Estado e roteamento condicional. |
+| **Pydantic** | Esquemas estruturados e validação de dados. |
 | **Groq / ChatGroq** | Acesso ao modelo de linguagem. |
-| **Hugging Face / Sentence Transformers** | Geração local de embeddings multilíngues. |
+| **Hugging Face / Sentence Transformers** | Embeddings multilíngues locais. |
 | **FAISS** | Indexação e busca vetorial. |
 | **PyPDFLoader / pypdf** | Extração de texto dos PDFs. |
 | **Decimal** | Operações com valores financeiros. |
 | **python-dotenv** | Carregamento das configurações de ambiente. |
 
-O modelo configurado é `openai/gpt-oss-20b`, com temperatura zero. O agente utiliza `create_tool_calling_agent` e `AgentExecutor`, disponíveis em `langchain_classic`.
+O modelo configurado é `openai/gpt-oss-20b`, com temperatura zero.
 
-### Competências demonstradas
-
-- Engenharia de prompts para classificação, extração e resposta documental.
-- Modelagem de esquemas com Pydantic.
-- Integração de LLMs com ferramentas de cálculo.
-- Construção de um pipeline RAG com múltiplos PDFs.
-- Preservação de metadados para referência às fontes.
-- Orquestração de caminhos condicionais com LangGraph.
-- Tratamento de dados ausentes e resultados parciais.
-- Tradução de necessidades de atendimento em componentes de software.
+O agente utiliza `create_tool_calling_agent` e `AgentExecutor`, de `langchain_classic`. O extrator da proposta utiliza saída em modo JSON com validação pelo esquema Pydantic.
 
 ## Organização do repositório
 
-| Diretório | Papel na evolução |
-|---|---|
-| [`01_credit_tools/`](01_credit_tools/) | Fundamentos: extração estruturada e agente com ferramentas financeiras. |
-| [`02_credit_rag/`](02_credit_rag/) | Consulta documental: recuperação semântica e respostas fundamentadas em PDFs. |
-| [`03_credit_lang_graph/`](03_credit_lang_graph/) | Aplicação principal: integração dos componentes com classificação e roteamento. |
-| [`03_credit_graph/`](03_credit_graph/) | Implementação anterior, mantida como histórico da evolução. |
+```text
+credit-intelligence-lab/
+├── 01_credit_tools/
+│   └── main.py
+├── 02_credit_rag/
+│   └── ...
+├── 03_credit_lang_graph/
+│   ├── documentos/
+│   │   └── ... PDFs da Cooperativa Aurora
+│   ├── app.py
+│   └── main.py
+├── docs/
+│   └── images/
+│       └── aurora-streamlit.png
+├── .env.example
+├── .gitignore
+├── requirements.txt
+└── README.md
+```
 
-Os projetos foram organizados em etapas para tornar visíveis as decisões e os conceitos incorporados ao longo do desenvolvimento.
-
-**Para conhecer a solução integrada, comece por `03_credit_lang_graph/`.**
-
-## Executar localmente
+## Como executar
 
 ### 1. Clonar o repositório
 
@@ -203,116 +244,127 @@ cd credit-intelligence-lab
 
 ### 2. Preparar o ambiente
 
-Utilize Python de 64 bits compatível com as dependências. **Python 3.12 é a base sugerida**, pois o código utiliza sintaxe de f-strings disponível a partir dessa versão.
+Utilize **Python 3.12 de 64 bits**. O código contém f-strings com sintaxe disponível a partir dessa versão.
 
-No Windows, pelo **Prompt de Comando — CMD**:
+**Windows — PowerShell:**
 
-```bat
+```powershell
 py -3.12 -m venv .venv
-.venv\Scripts\activate.bat
+.\.venv\Scripts\Activate.ps1
+
 python -m pip install --upgrade pip
 python -m pip install -r requirements.txt
+python -m pip install streamlit
 ```
 
-Em Linux ou macOS, com Python 3.12 instalado:
+**Linux ou macOS:**
 
 ```bash
 python3.12 -m venv .venv
 source .venv/bin/activate
+
 python -m pip install --upgrade pip
 python -m pip install -r requirements.txt
+python -m pip install streamlit
 ```
 
-O `requirements.txt` registra versões do ambiente de desenvolvimento. A instalação em um ambiente limpo ainda precisa ser validada; pacotes binários como FAISS e PyTorch dependem da compatibilidade entre Python e sistema operacional.
+### 3. Configurar a API
 
-### 3. Configurar a API GROQ
+Crie uma chave no [console da Groq](https://console.groq.com/keys).
 
-1. Crie uma chave de API em https://console.groq.com/keys.
-2. Copie `.env.example` para `.env`.
-
-No Windows, pelo CMD:
-
-```bat
-copy .env.example .env
-```
-
-No Linux ou macOS:
-
-```bash
-cp .env.example .env
-```
-
-3. Abra o `.env` e preencha sua chave:
+Copie `.env.example` para `.env`, na raiz do repositório, e preencha:
 
 ```dotenv
 GROQ_API_KEY=sua_chave_aqui
 ```
 
-O projeto carrega essa configuração com `load_dotenv()`.
+**Não publique o arquivo `.env` nem sua chave de API.**
 
-O modelo utilizado é `openai/gpt-oss-20b`, configurado na função `criar_modelo()`.
+### 4. Executar a aplicação com Streamlit
 
-### 4. Executar a aplicação principal
-
-```bash
-python 03_credit_lang_graph/main.py
-```
-
-Para executar as etapas anteriores:
+Na raiz do repositório:
 
 ```bash
-python 01_credit_tools/main.py
+python -m streamlit run 03_credit_lang_graph/app.py
 ```
 
-```bash
-python 02_credit_rag/main.py
+Abra o endereço exibido no terminal, normalmente:
+
+```text
+http://localhost:8501
 ```
 
-A interação ocorre pelo terminal. Nos projetos com RAG, o índice é reconstruído a cada inicialização. Na aplicação integrada, essa preparação ocorre mesmo quando a mensagem será encaminhada apenas para cálculo.
+A primeira inicialização pode demorar devido ao download do modelo de embeddings e à preparação do índice vetorial.
+
+A interface utiliza `st.cache_resource` para reutilizar o grafo entre as interações. O histórico fica separado na sessão de cada conversa.
+
+O índice não é persistido em disco e precisa ser reconstruído em uma nova inicialização do processo.
+
+### Executar pelo terminal
+
+| Projeto | Comando |
+|---|---|
+| Agente com ferramentas | `python 01_credit_tools/main.py` |
+| Consulta documental | `python 02_credit_rag/main.py` |
+| Aplicação final | `python 03_credit_lang_graph/main.py` |
+
+Na conversa pelo terminal da aplicação final, digite `sair` para encerrar.
+
+Para parar o servidor Streamlit, pressione `Ctrl + C` no terminal.
 
 ## Cenários de avaliação manual
 
 | Cenário | Verificação esperada |
 |---|---|
-| Pergunta sobre documentação de MEI | Encaminhar para consulta e apresentar fontes pertinentes. |
-| Proposta completa | Encaminhar para cálculo e conferir os seis indicadores do exemplo. |
-| Proposta sem nova parcela | Apresentar os resultados atuais possíveis e explicar os dados ausentes. |
-| Consulta às regras com pedido de indicadores | Percorrer consulta e cálculo antes da finalização. |
-| Pedido sem intenção clara | Encaminhar para esclarecimento. |
-| Pergunta sem suporte documental | Informar a insuficiência do contexto, sem inventar regras. |
+| Documentos para associação como MEI | Consulta aos PDFs e apresentação de fontes pertinentes. |
+| Proposta completa | Execução das ferramentas e conferência dos seis indicadores. |
+| Alteração da parcela durante a conversa | Preservação dos demais dados e atualização dos cálculos. |
+| Correção da renda | Utilização do valor corrigido e das condições mais recentes da proposta. |
+| Ausência da nova parcela | Indicadores atuais possíveis e explicação dos dados ausentes. |
+| Consulta às regras com pedido de cálculo | Execução dos dois caminhos antes da finalização. |
+| Mudança de assunto | Uso do histórico sem misturar solicitações ou propostas diferentes. |
+| Nova conversa | Limpeza do histórico anterior. |
+| Pergunta sem suporte documental | Comunicação da insuficiência do contexto. |
 
-A trilha exibida ao final ajuda a conferir as decisões de roteamento. Ainda não há métricas consolidadas de qualidade da recuperação, fidelidade das respostas ou acerto da classificação.
+A interface, os cálculos do exemplo e a continuidade da proposta foram demonstrados manualmente durante o desenvolvimento.
 
-## Estado atual e limites
+Esses exemplos não substituem testes automatizados. Ainda não há métricas consolidadas de qualidade da recuperação, classificação ou fidelidade das respostas.
 
-O projeto é um protótipo de portfólio executado pelo terminal. Na versão revisada, foram identificados dois ajustes necessários antes de consolidar os testes dos caminhos de cálculo:
+## Limites da aplicação
 
-- No nó `calcular`, enviar ao extrator um dicionário com a chave `mensagem`, correspondente à variável do prompt.
-- Nas descrições de `valor_solicitado` e `valor_parcela_proposta`, orientar o uso de `null` para dados ausentes, em vez de zero, respeitando a restrição `gt=0`.
-
-Além desses ajustes:
-
-- O agente decide quais ferramentas executar; a execução de todas as ferramentas aplicáveis precisa ser verificada nos testes.
-- Pydantic valida estrutura e restrições, mas não garante interpretação correta da mensagem.
-- As ferramentas não calculam juros, CET, entrada ou renegociação.
-- As citações são geradas pelo modelo e ainda não passam por validação automática.
-- Não há OCR, reranking, memória entre conversas ou persistência da trilha.
-- Não há integração com contas, transações ou sistemas bancários.
-- Os embeddings são gerados localmente; mensagens e trechos usados nas chamadas são enviados à API Groq. As demonstrações devem utilizar dados fictícios.
+- O assistente não aprova ou reprova crédito, não classifica risco e não executa operações bancárias.
+- A busca semântica pode deixar de recuperar trechos relevantes.
+- Pydantic valida tipos e restrições, mas não garante interpretação correta da mensagem.
+- O histórico é interpretado por uma LLM; correções e mudanças de proposta precisam ser avaliadas.
+- A seleção das ferramentas depende do agente.
+- As referências documentais ainda não possuem validação automática.
+- Não há OCR, persistência de conversas ou integração com sistemas bancários.
+- Mensagens e trechos utilizados nas chamadas são enviados à API Groq. As demonstrações devem utilizar dados fictícios.
 
 ## Próximas evoluções
 
-- [ ] Consolidar a validação dos quatro caminhos e dos casos com informações incompletas.
-- [ ] Criar testes automatizados das ferramentas financeiras e do roteamento.
-- [ ] Validar e simplificar as dependências para instalação reproduzível.
-- [ ] Persistir o índice vetorial para evitar reprocessamento.
-- [ ] Construir uma base de avaliação com perguntas e evidências de referência.
-- [ ] Validar fontes e páginas antes de apresentar a resposta.
-- [ ] Adicionar interface de conversa e memória por sessão.
-- [ ] Acompanhar latência, custo por solicitação e qualidade das respostas.
+- [ ] Automatizar testes das ferramentas financeiras e dos caminhos do grafo.
+- [ ] Avaliar conversas com correções, dados incompletos e mudanças de assunto.
+- [ ] Persistir o índice vetorial para reduzir o tempo de inicialização.
+- [ ] Criar uma base de perguntas e evidências para avaliar o RAG.
+- [ ] Validar fontes e páginas antes da apresentação.
+- [ ] Consolidar dependências e validar a instalação em ambiente limpo.
+- [ ] Medir latência, consumo de tokens e qualidade das respostas.
+
+## Competências demonstradas
+
+- Construção de aplicações com IA generativa.
+- Engenharia de prompts para interpretação, classificação e extração.
+- Modelagem e validação de dados com Pydantic.
+- Integração de LLMs com ferramentas Python.
+- Recuperação de informações em múltiplos PDFs.
+- Orquestração de fluxos condicionais com LangGraph.
+- Histórico conversacional por sessão.
+- Desenvolvimento de interfaces com Streamlit.
+- Aplicação de IA a necessidades de atendimento do setor financeiro.
 
 ## Autor
 
 Desenvolvido por **[Renan Assis Trevelim](https://github.com/RenanTrevelim)**.
 
-Projeto de portfólio voltado à aplicação de dados e inteligência artificial no setor financeiro, com foco em atendimento, consulta documental e apoio à análise de propostas de crédito.
+Projeto de portfólio voltado ao uso de IA generativa no setor financeiro, com foco em atendimento conversacional, consulta documental e apoio à análise de propostas de crédito.
