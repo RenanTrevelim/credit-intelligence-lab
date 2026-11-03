@@ -26,6 +26,8 @@ from langchain_classic.agents import (
     create_tool_calling_agent,
 )
 from langchain_core.prompts import MessagesPlaceholder
+from langchain_core.messages import BaseMessage, HumanMessage, AIMessage
+from langchain_core.output_parsers import StrOutputParser
 
 # ==================================================
 # DOCUMENTOS E DIVISÃO EM CHUNKS
@@ -552,12 +554,27 @@ def criar_extrator(modelo):
             - quantidade_parcelas deve ser um número inteiro, sem aspas.
               Exemplo: 24, nunca "24".
             - Para informações ausentes, retorne null, nunca a string "null".
+
+            FORMATO DA SAÍDA
+
+            - Retorne somente um objeto JSON válido.
+            - Inclua exatamente estes cinco campos:
+              renda_liquida_mensal,
+              parcelas_mensais_existentes,
+              valor_solicitado,
+              quantidade_parcelas,
+              valor_parcela_proposta.
+            - Valores monetários devem ser números, sem R$,
+              sem separador de milhares e com ponto decimal.
+            - quantidade_parcelas deve ser um inteiro sem aspas.
+            - Informações ausentes devem receber null.
+            - Não escreva explicações nem blocos de código.
             """
         ),
         ("human", "{mensagem}"),
     ])
 
-    modelo_estruturado = modelo.with_structured_output(PropostaCredito)
+    modelo_estruturado = modelo.with_structured_output(PropostaCredito, method="json_mode")
 
     return prompt | modelo_estruturado
 
@@ -766,24 +783,109 @@ def cria_classificador(modelo):
     return prompt | modelo_estruturado
 
 # ==================================================
+# 13.1. CRIAR INTERPRETADOR DO HISTÓRICO
+# ==================================================
+
+def criar_interpretador(modelo):
+    """Torna a solicitação atual compreensível usando o histórico."""
+
+    prompt = ChatPromptTemplate.from_messages([
+        (
+            "system",
+            """
+            Prepare a solicitação atual de um cooperado para
+            consultar documentos ou calcular indicadores de crédito.
+
+            Use o histórico somente para compreender referências
+            e recuperar dados necessários à solicitação atual.
+
+            REGRAS
+
+            - Preserve a intenção e as restrições do usuário.
+            - Se a mensagem já estiver completa e independente,
+              copie-a sem acrescentar informações.
+            - Esclareça referências como "isso", "esses documentos",
+              "essa proposta" ou "e nesse caso".
+            - Respeite mudanças de assunto.
+            - Ao continuar ou corrigir a mesma proposta, preserve todos
+            os dados explicitamente informados pelo usuário:
+            renda líquida mensal, parcelas existentes, valor solicitado,
+            quantidade de parcelas e valor da parcela proposta.
+            - Substitua somente os campos que o usuário alterar.
+            - Não descarte dados por considerar que serão desnecessários.
+            - Preserve o alcance do pedido: "recalcule os indicadores"
+            não deve ser reduzido a "recalcule o comprometimento".
+            - Não reaproveite dados de outra proposta ou pessoa.
+            - Uma correção explícita substitui o valor anterior.
+            - Não misture dados de pessoas ou propostas diferentes.
+            - Não transforme renda sem identificação em renda líquida.
+            - Não use valores calculados, exemplos ou suposições
+              das respostas do assistente como dados do usuário.
+            - As respostas anteriores ajudam a entender o assunto,
+              mas não comprovam regras ou políticas da cooperativa.
+            - Se houver ambiguidade ou conflito sem correção explícita,
+              preserve essa incerteza; não escolha valores por conta própria.
+            - Não faça cálculos, responda à solicitação ou invente dados.
+            - Retorne somente a solicitação interpretada, sem explicações.
+
+            EXEMPLOS
+
+            Histórico:
+            Usuário perguntou quais documentos uma pessoa física
+            precisa apresentar para se associar à cooperativa.
+
+            Mensagem atual:
+            E para MEI?
+
+            Saída:
+            Quais documentos um MEI precisa apresentar para se
+            associar à cooperativa?
+
+            Histórico:
+            Usuário informou renda líquida mensal de R$ 5.500,
+            parcelas existentes de R$ 700 e nova parcela de R$ 850,
+            pedindo o cálculo do comprometimento da renda.
+
+            Mensagem atual:
+            E se a nova parcela for 900?
+
+            Saída:
+            Recalcule o comprometimento da renda considerando
+            renda líquida mensal de R$ 5.500, parcelas existentes
+            de R$ 700 e nova parcela de R$ 900.
+            """
+        ),
+        MessagesPlaceholder(variable_name="historico"),
+        ("human", "{mensagem}"),
+    ])
+
+    return prompt | modelo | StrOutputParser()
+
+# ==================================================
 # 14. ESTADO DO GRAFO
 # ==================================================
 
 class EstadoConsulta(TypedDict):
     mensagem: str
+    historico: list[BaseMessage]
+    mensagem_interpretada: str
+
     classificacao: ClassificacaoSolicitacao | None
     contexto: str
     proposta: PropostaCredito | None
     resposta_rag: RespostaRag | None
     resultados_calculos: str
     resposta_final: str
-    trilha : Annotated[list[str], operator.add]
+    trilha: Annotated[list[str], operator.add]
 
 # ==================================================
 # 15. PREPARAR OS COMPONENTES
 # ==================================================
 
 modelo = criar_modelo()
+
+interpretador = criar_interpretador(modelo)
+
 classificador = cria_classificador(modelo)
 resposta_rag = criar_chain_rag(modelo)
 extrator = criar_extrator(modelo)
@@ -792,6 +894,30 @@ resposta_agente = criar_agente(modelo)
 documentos = carregar_documentos()
 trechos = dividir_documentos(documentos)
 banco = criar_banco(trechos)
+
+# ==================================================
+# 15.1. NÓ: INTERPRETAR A SOLICITAÇÃO
+# ==================================================
+
+def interpretar(estado: EstadoConsulta):
+    """Usa o histórico para compreender a mensagem atual."""
+
+    print("\n[INTERPRETAÇÃO]: Entendendo a solicitação ...")
+
+    mensagem_interpretada = interpretador.invoke({
+        "historico": estado["historico"],
+        "mensagem": estado["mensagem"]
+    }).strip()
+
+    if not mensagem_interpretada:
+        mensagem_interpretada = estado["mensagem"]
+
+    return {
+        "mensagem_interpretada": mensagem_interpretada,
+        "trilha": [
+            f"Interpretação: {mensagem_interpretada}"
+        ]
+    }
 
 # ==================================================
 # 16. NÓ: CLASSIFICAR SOLICITAÇÃO
@@ -803,7 +929,7 @@ def classificar(estado: EstadoConsulta):
     print("[CLASSIFICAÇÃO]: Identificando a solicitação ...")
 
     classificacao = classificador.invoke({
-        "pergunta": estado["mensagem"]
+        "pergunta": estado["mensagem_interpretada"]
     })
 
     return {
@@ -823,10 +949,10 @@ def consultar(estado: EstadoConsulta):
 
     print("\n[CONSULTANDO]: Buscando as informações nos PDFs ...")
 
-    contexto = recuperar_contexto(estado["mensagem"], banco)
+    contexto = recuperar_contexto(estado["mensagem_interpretada"], banco)
 
     resposta = resposta_rag.invoke({
-        "pergunta": estado["mensagem"],
+        "pergunta": estado["mensagem_interpretada"],
         "contexto": contexto
     })
 
@@ -847,8 +973,11 @@ def calcular(estado: EstadoConsulta):
 
     print("\n[CÁLCULOS]: Extraindo dados e executando as ferramentas ...")
 
+    print("\n=== MENSAGEM ENVIADA AO EXTRATOR ===")
+    print(estado["mensagem_interpretada"])
+
     proposta = extrator.invoke({
-        "mensagem": estado["mensagem"]
+        "mensagem": estado["mensagem_interpretada"]
     })
 
     resultado = resposta_agente.invoke({
@@ -955,6 +1084,7 @@ def criar_grafo():
     grafo = StateGraph(EstadoConsulta)
 
     # Cadastrar os nós
+    grafo.add_node("interpretar", interpretar)
     grafo.add_node("classificar", classificar)
     grafo.add_node("consultar", consultar)
     grafo.add_node("calcular", calcular)
@@ -972,8 +1102,9 @@ def criar_grafo():
         etapa="consulta"
     )
 
-    # Iniciar pela classificação
-    grafo.add_edge(START, "classificar")
+    # Interpretar antes de classificar
+    grafo.add_edge(START, "interpretar")
+    grafo.add_edge("interpretar", "classificar")
 
     # Escolher o caminho inicial
     grafo.add_conditional_edges(
@@ -1010,33 +1141,55 @@ def criar_grafo():
 # ==================================================
 
 def main():
-    mensagem = input("[COOPERADO]: ").strip()
-
-    if not mensagem:
-        print("Digite uma pergunta ou solicitação.")
-        return
-
     app = criar_grafo()
 
-    entrada: EstadoConsulta = {
-        "mensagem": mensagem,
-        "classificacao": None,
-        "contexto": "",
-        "proposta": None,
-        "resposta_rag": None,
-        "resultados_calculos": "",
-        "resposta_final": "",
-        "trilha": [],
-    }
+    historico: list[BaseMessage] = []
 
-    resultado = app.invoke(entrada)
+    print("\n=== ASSISTENTE DA COOPERATIVA AURORA ===")
+    print("Digite sua solicitação ou 'sair' para encerrar.")
 
-    print("\n=== RESPOSTA ===")
-    print(resultado["resposta_final"])
+    while True:
+        mensagem = input("\n[COOPERADO]: ").strip()
 
-    print("\n=== CAMINHO PERCORRIDO ===")
-    for etapa in resultado["trilha"]:
-        print(f"- {etapa}")
+        if mensagem.lower() == "sair":
+            print("Conversa encerrada.")
+            break
+
+        if not mensagem:
+            print("Digite uma pergunta ou solicitação.")
+            continue
+
+        entrada: EstadoConsulta = {
+            "mensagem": mensagem,
+            "historico": historico.copy(),
+            "mensagem_interpretada": "",
+            "classificacao": None,
+            "contexto": "",
+            "proposta": None,
+            "resposta_rag": None,
+            "resultados_calculos": "",
+            "resposta_final": "",
+            "trilha": [],
+        }
+
+        resultado = app.invoke(entrada)
+
+        print("\n=== RESPOSTA ===")
+        print(resultado["resposta_final"])
+
+        print("\n=== CAMINHO PERCORRIDO ===")
+
+        for etapa in resultado["trilha"]:
+            print(f"- {etapa}")
+
+        # Guardar a mensagem original e a resposta concluída
+        historico.append(
+            HumanMessage(content=mensagem)
+        )
+
+        historico.append(
+            AIMessage(content=resultado["resposta_final"])
+        )
 
 
 if __name__ == "__main__":
